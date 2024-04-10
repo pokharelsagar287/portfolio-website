@@ -1,92 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
+    <title>Sagar Pokharel - Portfolio</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
 
-        header {
-            background-color: #007bff;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-
-        section {
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 800px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .project {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-
-        .project img {
-            max-width: 100%;
-            border-radius: 8px;
-        }
-
-        .project h2 {
-            margin-top: 0;
-            color: #007bff;
-        }
-
-        .project p {
-            margin-bottom: 0;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
 </head>
+
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Sagar Pokharel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#portfolio">Portfolio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-<header>
-    <h1>My Portfolio</h1>
-    <p>Welcome to my portfolio website</p>
-</header>
+    <header class="jumbotron jumbotron-fluid text-center">
+        <div class="container">
+            <h1 class="display-4">Welcome to My Portfolio</h1>
+            <p class="lead">UI/UX Design | Data Entry</p>
+        </div>
+    </header>
 
-<section>
-    <div class="project">
-        <h2>Project 1</h2>
-        <img src="project1.jpg" alt="Project 1">
-        <p>Description of Project 1</p>
-    </div>
+   
+<section id="about" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>About Me</h2>
+                <p>Hello! I'm Sagar Pokharel, a Civil Engineering student from Nepal with a passion for design and data. I'm on a journey to expand my horizons and explore the exciting world of UI/UX design and data entry. Eager to turn my passion into a profession, I've embarked on a learning journey, soaking up knowledge from various online sources to hone my skills and expertise.</p>
+                <h3>Skills:</h3>
+                <ul>
+                    <li><strong>UI/UX Design:</strong> I'm delving deep into the principles of user interface and user experience design, learning to create intuitive and visually appealing designs that enhance user satisfaction.</li>
+                   
+                    <li><strong>Graphic Design Tools:</strong> Proficient in tools such as Adobe Photoshop and Illustrator for creating stunning graphics and designs.</li>
+                    <li><strong>Prototyping:</strong> Learning to use prototyping tools like Figma and Adobe XD to bring my design concepts to life and create interactive prototypes.</li>
+                    <li><strong>Data Entry Software:</strong> Familiar with data entry software such as Microsoft Excel and Google Sheets, adept at organizing and managing data effectively.</li>
+                    <li><strong>Problem-Solving:</strong> Equipped with strong problem-solving skills, I tackle challenges head-on and find innovative solutions to complex problems.</li>
+                    <li><strong>Communication:</strong> With excellent communication skills, I collaborate effectively with team members and clients to deliver projects that exceed expectations.</li>
+                    <li><strong>Adaptability:</strong> As a quick learner, I adapt to new tools and technologies with ease, staying updated with the latest trends and advancements in design and data entry.</li>
+                </ul>
+            </div>
+                <div class="col-lg-6">
+                    <img src="profile-pic.png" height="400px" width="400px" alt="Profile Picture" class="img-fluid rounded-circle">
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="project">
-        <h2>Project 2</h2>
-        <img src="project2.jpg" alt="Project 2">
-        <p>Description of Project 2</p>
-    </div>
+    <section id="portfolio" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center">Portfolio</h2>
+            <!-- Add your portfolio items here -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="project1.jpg" class="card-img-top" alt="Project 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Project 1</h5>
+                            <p class="card-text">Description of project 1.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="project2.jpg" class="card-img-top" alt="Project 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Project 2</h5>
+                            <p class="card-text">Description of project 2.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="project3.jpg" class="card-img-top" alt="Project 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Project 3</h5>
+                            <p class="card-text">Description of project 3.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Add more projects here -->
-</section>
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Contact Me</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="5" placeholder="Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<footer>
-    <p>&copy; 2024 My Portfolio</p>
-</footer>
-
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
