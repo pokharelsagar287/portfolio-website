@@ -1,4 +1,55 @@
-/* Custom CSS */
+/* Custom styles */
+
+/* Background color and font for navbar */
+.navbar-light .navbar-brand,
+.navbar-light .navbar-nav .nav-link {
+    color: #333; /* Font color */
+    font-family: 'Arial', sans-serif; /* Font family */
+}
+
+/* Style for the toggle button */
+.navbar-toggler {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+}
+
+.navbar-toggler-icon {
+    font-size: 24px;
+    color: #333; /* Default color */
+}
+
+/* Hover effect for the toggle button */
+.navbar-toggler:hover .navbar-toggler-icon {
+    color: #007bff; /* Hover color */
+}
+
+/* Centering the ul element within the .navbar-collapse */
+.navbar-collapse {
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+}
+
+.navbar-collapse ul {
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+    margin: 0; /* Remove default margin */
+}
+
+/* Blue background on hover with smoothed edges */
+.navbar-light .navbar-nav .nav-link:hover {
+    background-color: #007bff; /* Blue background */
+    color: #fff; /* Font color on hover */
+    border-radius: 5px; /* Smoothened edges */
+}
+
+/* Adding transition for smooth hover effect */
+.navbar-light .navbar-nav .nav-link {
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+
 
 /* Header Styling */
 .jumbotron {
@@ -61,38 +112,81 @@
     color: #666;
 }
 
-/* Contact Section Styling */
+/* Contact section styles */
 #contact {
-    background-color: #f8f9fa; /* Light gray background */
-    padding: 80px 0;
+    background-color: #f8f9fa;
+    color: #007bff;
 }
 
-#contact h2 {
-    margin-bottom: 40px;
-    color: #007bff; /* Blue color */
-    font-family: 'Roboto', sans-serif; /* Set font to Roboto */
+.contact-info {
+    background-color: #007bff; /* Set background color */
+    color: white; /* Set text color */
+    padding: 20px; /* Add padding */
+    border-radius: 10px;
+     position: relative;
+     left: 120px;
+    margin-bottom: 30px;
+    
 }
 
-.contact-form .form-control {
-    border-radius: 0;
-    border-color: #ced4da; /* Gray border color */
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-.contact-form textarea.form-control {
+.info-item i {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+/* Form styles */
+.contact-form {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.contact-form textarea {
     resize: none;
 }
 
-.contact-form button[type="submit"] {
-    transition: background-color 0.3s ease;
-    background-color: #007bff; /* Blue button background */
-    border-color: #007bff; /* Blue button border color */
-    color: #fff; /* White button text color */
-    font-family: 'Roboto', sans-serif; /* Set font to Roboto */
+.contact-form button {
+    width: 100%;
 }
 
-.contact-form button[type="submit"]:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    border-color: #0056b3; /* Darker blue border color on hover */
+/* Hover effect for the button */
+.contact-form button:hover {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Media query for responsive design */
+@media (max-width: 768px) {
+    .contact-info {
+        text-align: center;
+    }
+    .contact-info .info-item {
+        justify-content: center;
+    }
+    .contact-form,
+    .contact-form .form-group {
+        width: 100%;
+    }
 }
 
 /* Responsive adjustments */
