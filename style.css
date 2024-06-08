@@ -53,16 +53,18 @@
 
 /* Header Styling */
 .jumbotron {
-    background-image: url('background-image.png');
+    background-image: url('background-image.jpg');
     background-size: cover;
     color: #fff;
     padding: 100px 0;
      font-family: 'Roboto', sans-serif;
+     
+     
 
 }
 
 .jumbotron h1.display-4 {
-    color: #fff; /* White text */
+    color: #FDFEFF /* White text */
 }
 
 .jumbotron p.lead {
