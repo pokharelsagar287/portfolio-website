@@ -104,14 +104,8 @@
     <script>
         document.getElementById('resultForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            const rollNo = document.getElementById('rollNo').value;
-            const email = document.getElementById('email').value;
-
-            // Simple validation for email and roll number format (optional)
-            if (!validateEmail(email)) {
-                document.getElementById('resultDisplay').innerHTML = 'Please enter a valid email address.';
-                return;
-            }
+            const rollNo = document.getElementById('rollNo').value.trim();
+            const email = document.getElementById('email').value.trim();
 
             // Fetch the CSV file and find the result
             fetch('results.csv')
@@ -120,23 +114,21 @@
                     const rows = data.split('\n').map(row => row.split(','));
                     let found = false;
                     for (let row of rows) {
-                        if (row[0] === rollNo) {
-                            document.getElementById('resultDisplay').innerHTML = `Roll No: ${row[0]}<br>Marks: ${row[1]}<br>Email: ${email}`;
+                        // Check for matching roll number and email
+                        if (row[0].trim() === rollNo && row[1].trim() === email) {
+                            document.getElementById('resultDisplay').innerHTML = `Roll No: ${row[0]}<br>Marks: ${row[2]}`;
                             found = true;
                             break;
                         }
                     }
                     if (!found) {
-                        document.getElementById('resultDisplay').innerHTML = 'Result not found!';
+                        document.getElementById('resultDisplay').innerHTML = 'Result not found! Please check your roll number and email.';
                     }
+                })
+                .catch(err => {
+                    document.getElementById('resultDisplay').innerHTML = 'Error fetching results. Please try again later.';
                 });
         });
-
-        // Email validation function
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
     </script>
 </body>
 </html>
