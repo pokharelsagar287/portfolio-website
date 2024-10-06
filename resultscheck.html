@@ -8,7 +8,7 @@
         /* Global Styles */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #e0f7fa; /* Sky bluish background */
+            background-color: #e0f7fa;
             color: #333;
             display: flex;
             justify-content: center;
@@ -28,12 +28,11 @@
         }
 
         h2 {
-            color: #03a9f4; /* Sky blue for header */
+            color: #03a9f4;
             text-align: center;
             margin-bottom: 30px;
         }
 
-        /* Input Field Styling */
         input[type="text"], input[type="email"] {
             width: 100%;
             padding: 12px;
@@ -44,14 +43,8 @@
             font-size: 16px;
         }
 
-        /* Placeholder styling */
-        input[type="text"]::placeholder {
-            color: #aaa; /* Light grey color for the placeholder */
-        }
-
-        /* Button Styling */
         input[type="submit"] {
-            background-color: #03a9f4; /* Sky blue button */
+            background-color: #03a9f4;
             color: white;
             padding: 14px 20px;
             border: none;
@@ -63,14 +56,13 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #0288d1; /* Darker blue on hover */
+            background-color: #0288d1;
         }
 
-        /* Displaying results */
         #resultDisplay {
             margin-top: 20px;
             padding: 15px;
-            background-color: #e1f5fe; /* Light sky blue background for result display */
+            background-color: #e1f5fe;
             border: 1px solid #bbb;
             border-radius: 4px;
             color: #333;
@@ -78,7 +70,6 @@
             font-size: 18px;
         }
 
-        /* Responsive styling for mobile */
         @media (max-width: 600px) {
             .container {
                 padding: 20px;
@@ -105,143 +96,44 @@
 
         <div id="resultDisplay"></div>
     </div>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Check Your Results</title>
-    <style>
-        /* Global Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #e0f7fa; /* Sky bluish background */
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
 
-        /* Container for form and results */
-        .container {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-        }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script>
+        // CSV data URL (you can use the uploaded CSV or host it)
+        const csvFilePath = '/path/to/your/csv/results.csv';
 
-        h2 {
-            color: #03a9f4; /* Sky blue for header */
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        /* Input Field Styling */
-        input[type="text"], input[type="email"] {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0 20px;
-            border: 1px solid #bbb;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-
-        /* Placeholder styling */
-        input[type="text"]::placeholder {
-            color: #aaa; /* Light grey color for the placeholder */
-        }
-
-        /* Button Styling */
-        input[type="submit"] {
-            background-color: #03a9f4; /* Sky blue button */
-            color: white;
-            padding: 14px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            transition: background-color 0.3s ease;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #0288d1; /* Darker blue on hover */
-        }
-
-        /* Displaying results */
-        #resultDisplay {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #e1f5fe; /* Light sky blue background for result display */
-            border: 1px solid #bbb;
-            border-radius: 4px;
-            color: #333;
-            text-align: center;
-            font-size: 18px;
-        }
-
-        /* Responsive styling for mobile */
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-
-            input[type="text"], input[type="email"], input[type="submit"] {
-                font-size: 14px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2>Check Your Results</h2>
-        <form id="resultForm">
-            <label for="rollNo">Enter Roll Number:</label>
-            <input type="text" id="rollNo" name="rollNo" placeholder="e.g. PAS079BCE001" required>
-
-            <label for="email">Enter Email Address:</label>
-            <input type="email" id="email" name="email" required>
-
-            <input type="submit" value="Check Result">
-        </form>
-
-        <div id="resultDisplay"></div>
-    </div>
-<script>
-    document.getElementById('resultForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const rollNo = document.getElementById('rollNo').value.trim().toLowerCase();
-        const email = document.getElementById('email').value.trim().toLowerCase();
-
-        // Fetch the CSV file and find the result
-        fetch('results.csv')
-            .then(response => response.text())
-            .then(data => {
-                const rows = data.split('\n').map(row => row.split(','));
-                let found = false;
-                for (let row of rows) {
-                    // Check for matching roll number and email, trimmed and lowercased
-                    if (row[0].trim().toLowerCase() === rollNo && row[1].trim().toLowerCase() === email) {
-                        document.getElementById('resultDisplay').innerHTML = `Roll No: ${row[0]}<br>Marks: ${row[2]}`;
-                        found = true;
-                        break;
+        // Function to fetch and parse CSV data
+        function fetchResults(rollNo, email) {
+            Papa.parse(csvFilePath, {
+                download: true,
+                header: true,
+                complete: function(results) {
+                    const data = results.data;
+                    const result = data.find(row => row['Roll NO'] === rollNo && row['Email Adresss'] === email);
+                    
+                    if (result) {
+                        displayResult(`Marks: ${result.Marks}`);
+                    } else {
+                        displayResult("Result not found! Please check your roll number and email.");
                     }
                 }
-                if (!found) {
-                    document.getElementById('resultDisplay').innerHTML = 'Result not found! Please check your roll number and email.';
-                }
-            })
-            .catch(err => {
-                document.getElementById('resultDisplay').innerHTML = 'Error fetching results. Please try again later.';
             });
-</script>
+        }
 
-</body>
-</html>
+        // Function to handle form submission
+        document.getElementById("resultForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const rollNo = document.getElementById("rollNo").value.trim();
+            const email = document.getElementById("email").value.trim();
+            
+            fetchResults(rollNo, email);
+        });
+
+        // Function to display result in the resultDisplay div
+        function displayResult(message) {
+            document.getElementById("resultDisplay").textContent = message;
+        }
+    </script>
 </body>
 </html>
