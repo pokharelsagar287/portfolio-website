@@ -111,9 +111,12 @@
             event.preventDefault();
             const rollNo = document.getElementById('rollNo').value.trim().toLowerCase();
             const email = document.getElementById('email').value.trim().toLowerCase();
-
+    
+            console.log("Roll Number Entered: ", rollNo);
+            console.log("Email Entered: ", email);
+    
             // Fetch the CSV file and find the result
-            fetch('results (1).csv') // Make sure this matches your CSV file name
+            fetch('results.csv') // Make sure this matches your CSV file name
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -124,6 +127,7 @@
                     const rows = data.split('\n').map(row => row.split(','));
                     let found = false;
                     for (let row of rows) {
+                        console.log("Checking Row: ", row);
                         // Check for matching roll number and email, trimmed and lowercased
                         if (row[0].trim().toLowerCase() === rollNo && row[1].trim().toLowerCase() === email) {
                             document.getElementById('resultDisplay').innerHTML = `Roll No: ${row[0]}<br>Marks: ${row[2]}`;
@@ -139,5 +143,6 @@
                     document.getElementById('resultDisplay').innerHTML = 'Error fetching results. Please try again later.';
                 });
     </script>
+    
 </body>
 </html>
