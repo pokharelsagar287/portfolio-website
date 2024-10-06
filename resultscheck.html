@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Your Results</title>
+</head>
+<body>
+    <h2>Check Your Results</h2>
+    <form id="resultForm">
+        <label for="rollNo">Enter Roll Number:</label>
+        <input type="text" id="rollNo" name="rollNo" required>
+        <input type="submit" value="Check Result">
+    </form>
+
+    <div id="resultDisplay"></div>
+
+    <script>
+        document.getElementById('resultForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const rollNo = document.getElementById('rollNo').value;
+            fetch('results.csv')
+                .then(response => response.text())
+                .then(data => {
+                    const rows = data.split('\n').map(row => row.split(','));
+                    let found = false;
+                    for (let row of rows) {
+                        if (row[0] === rollNo) {
+                            document.getElementById('resultDisplay').innerHTML = `Roll No: ${row[0]}<br>Marks: ${row[1]}`;
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        document.getElementById('resultDisplay').innerHTML = 'Result not found!';
+                    }
+                });
+        });
+    </script>
+</body>
+</html>
