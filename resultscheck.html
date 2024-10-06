@@ -106,11 +106,11 @@
         <div id="resultDisplay"></div>
     </div>
 
-  <script>
+ <script>
     document.getElementById('resultForm').addEventListener('submit', function(event) {
         event.preventDefault();
-        const rollNo = document.getElementById('rollNo').value.trim();
-        const email = document.getElementById('email').value.trim();
+        const rollNo = document.getElementById('rollNo').value.trim().toLowerCase(); // Convert to lowercase
+        const email = document.getElementById('email').value.trim().toLowerCase(); // Convert to lowercase
 
         // Fetch the CSV file and find the result
         fetch('results.csv') // Use the correct file name
@@ -130,9 +130,9 @@
                 // Start from index 1 to skip the header row
                 for (let i = 1; i < rows.length; i++) {
                     const row = rows[i];
-                    console.log(`Checking Row: ${row[0].trim()} against RollNo: ${rollNo} and Email: ${email}`);
+                    console.log(`Checking Row: ${row[0].trim().toLowerCase()} against RollNo: ${rollNo} and Email: ${email}`); // Convert to lowercase
                     // Check for matching roll number and email
-                    if (row[0].trim() === rollNo && row[1].trim() === email) {
+                    if (row[0].trim().toLowerCase() === rollNo && row[1].trim().toLowerCase() === email) { // Convert to lowercase
                         document.getElementById('resultDisplay').innerHTML = `Roll No: ${row[0]}<br>Marks: ${row[2]}`;
                         found = true;
                         break;
@@ -149,6 +149,7 @@
             });
     });
 </script>
+
 
 
 </body>
