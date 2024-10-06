@@ -106,22 +106,31 @@
         <div id="resultDisplay"></div>
     </div>
 
-   <script>
+  <script>
     document.getElementById('resultForm').addEventListener('submit', function(event) {
         event.preventDefault();
         const rollNo = document.getElementById('rollNo').value.trim();
         const email = document.getElementById('email').value.trim();
 
         // Fetch the CSV file and find the result
-        fetch('results.csv') // Ensure the filename matches exactly
-            .then(response => response.text())
+        fetch('results.csv') // Use the correct file name
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
             .then(data => {
                 const rows = data.split('\n').map(row => row.split(','));
-                let found = false;
 
+                // Debug: Log rows
+                console.log(rows);
+
+                let found = false;
                 // Start from index 1 to skip the header row
                 for (let i = 1; i < rows.length; i++) {
                     const row = rows[i];
+                    console.log(`Checking Row: ${row[0].trim()} against RollNo: ${rollNo} and Email: ${email}`);
                     // Check for matching roll number and email
                     if (row[0].trim() === rollNo && row[1].trim() === email) {
                         document.getElementById('resultDisplay').innerHTML = `Roll No: ${row[0]}<br>Marks: ${row[2]}`;
@@ -140,6 +149,7 @@
             });
     });
 </script>
+
 
 </body>
 </html>
