@@ -6,7 +6,7 @@
     <title>Update Email</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #e0f7fa;
             display: flex;
             justify-content: center;
@@ -15,76 +15,63 @@
             margin: 0;
         }
         .container {
-            background-color: #ffffff;
-            padding: 40px;
+            background-color: white;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             width: 100%;
-        }
-        h2 {
-            color: #03a9f4;
             text-align: center;
-            margin-bottom: 20px;
         }
-        input[type="email"] {
+        input {
             width: 100%;
-            padding: 12px;
-            margin: 10px 0 20px;
+            padding: 10px;
+            margin: 10px 0;
             border: 1px solid #bbb;
             border-radius: 4px;
             font-size: 16px;
         }
-        input[type="submit"] {
+        button {
             background-color: #03a9f4;
             color: white;
-            padding: 14px 20px;
+            padding: 10px;
             border: none;
-            border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
             width: 100%;
-            transition: background-color 0.3s ease;
         }
-        input[type="submit"]:hover {
+        button:hover {
             background-color: #0288d1;
-        }
-        #message {
-            margin-top: 20px;
-            text-align: center;
-            color: green;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Update Your Email</h2>
-        <form id="updateEmailForm">
-            <label for="newEmail">New Email:</label>
-            <input type="email" id="newEmail" name="newEmail" required>
-            <input type="hidden" id="rollNo" name="rollNo">
-            <input type="submit" value="Update Email">
-        </form>
-        <div id="message"></div>
+        <input type="text" id="rollNo" placeholder="Enter Roll Number" required>
+        <input type="email" id="newEmail" placeholder="Enter New Email" required>
+        <button onclick="submitEmail()">Update Email</button>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const rollNo = urlParams.get("rollNo");
-            if (rollNo) {
-                document.getElementById("rollNo").value = rollNo;
+        function submitEmail() {
+            const rollNo = document.getElementById("rollNo").value.trim();
+            const newEmail = document.getElementById("newEmail").value.trim();
+
+            if (rollNo === "" || newEmail === "") {
+                alert("Please enter all details.");
+                return;
             }
-        });
 
-        document.getElementById("updateEmailForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            const rollNo = document.getElementById("rollNo").value;
-            const newEmail = document.getElementById("newEmail").value.trim().toLowerCase();
-
-            // Simulate email update
-            document.getElementById("message").innerHTML = `Email for Roll No: ${rollNo} has been updated to ${newEmail}`;
-        });
+            fetch('https://script.google.com/macros/s/AKfycbyJU349LHnIgVa7XsnW_Ot-XbbFznUaLcbwkekKTWDT1rRaTWphq-eCp8jT5MNm3D7h/exec', { // Replace with your actual Web App URL
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `rollNo=${encodeURIComponent(rollNo)}&newEmail=${encodeURIComponent(newEmail)}`
+            })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(err => alert("Error updating email!"));
+        }
     </script>
 </body>
 </html>
