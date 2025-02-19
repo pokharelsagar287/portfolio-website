@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Check Your Results</title>
     <style>
-        /* Global Styles */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #e0f7fa; /* Sky bluish background */
+            background-color: #e0f7fa;
             color: #333;
             display: flex;
             justify-content: center;
@@ -16,8 +15,6 @@
             height: 100vh;
             margin: 0;
         }
-
-        /* Container for form and results */
         .container {
             background-color: #ffffff;
             padding: 40px;
@@ -26,14 +23,11 @@
             max-width: 400px;
             width: 100%;
         }
-
         h2 {
-            color: #03a9f4; /* Sky blue for header */
+            color: #03a9f4;
             text-align: center;
             margin-bottom: 30px;
         }
-
-        /* Input Field Styling */
         input[type="text"], input[type="email"] {
             width: 100%;
             padding: 12px;
@@ -43,15 +37,8 @@
             box-sizing: border-box;
             font-size: 16px;
         }
-
-        /* Placeholder styling */
-        input[type="text"]::placeholder {
-            color: #aaa; /* Light grey color for the placeholder */
-        }
-
-        /* Button Styling */
         input[type="submit"] {
-            background-color: #03a9f4; /* Sky blue button */
+            background-color: #03a9f4;
             color: white;
             padding: 14px 20px;
             border: none;
@@ -61,29 +48,23 @@
             width: 100%;
             transition: background-color 0.3s ease;
         }
-
         input[type="submit"]:hover {
-            background-color: #0288d1; /* Darker blue on hover */
+            background-color: #0288d1;
         }
-
-        /* Displaying results */
         #resultDisplay {
             margin-top: 20px;
             padding: 15px;
-            background-color: #e1f5fe; /* Light sky blue background for result display */
+            background-color: #e1f5fe;
             border: 1px solid #bbb;
             border-radius: 4px;
             color: #333;
             text-align: center;
             font-size: 18px;
         }
-
-        /* Responsive styling for mobile */
         @media (max-width: 600px) {
             .container {
                 padding: 20px;
             }
-
             input[type="text"], input[type="email"], input[type="submit"] {
                 font-size: 14px;
             }
@@ -106,51 +87,45 @@
         <div id="resultDisplay"></div>
     </div>
 
- <script>
-    document.getElementById('resultForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const rollNo = document.getElementById('rollNo').value.trim().toLowerCase(); // Convert to lowercase
-        const email = document.getElementById('email').value.trim().toLowerCase(); // Convert to lowercase
+    <script>
+        document.getElementById('resultForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const rollNo = document.getElementById('rollNo').value.trim().toLowerCase();
+            const email = document.getElementById('email').value.trim().toLowerCase();
 
-        // Fetch the CSV file and find the result
-        fetch('results.csv') // Use the correct file name
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(data => {
-                const rows = data.split('\n').map(row => row.split(','));
-
-                // Debug: Log rows
-                console.log(rows);
-
-                let found = false;
-                // Start from index 1 to skip the header row
-                for (let i = 1; i < rows.length; i++) {
-                    const row = rows[i];
-                    console.log(`Checking Row: ${row[0].trim().toLowerCase()} against RollNo: ${rollNo} and Email: ${email}`); // Convert to lowercase
-                    // Check for matching roll number and email
-                    if (row[0].trim().toLowerCase() === rollNo && row[1].trim().toLowerCase() === email) { // Convert to lowercase
-                        document.getElementById('resultDisplay').innerHTML = `Roll No: ${row[0]}<br>Marks: ${row[2]}`;
-                        found = true;
-                        break;
+            fetch('results.csv')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
                     }
-                }
+                    return response.text();
+                })
+                .then(data => {
+                    const rows = data.split('\n').map(row => row.split(','));
+                    let found = false;
 
-                if (!found) {
-                    document.getElementById('resultDisplay').innerHTML = 'Result not found! Please check your roll number and email.';
-                }
-            })
-            .catch(err => {
-                console.error("Error fetching results:", err);
-                document.getElementById('resultDisplay').innerHTML = 'Error fetching results. Please try again later.';
-            });
-    });
-</script>
+                    for (let i = 1; i < rows.length; i++) {
+                        const row = rows[i];
+                        if (row[0].trim().toLowerCase() === rollNo) {
+                            if (row[1].trim().toLowerCase() === email) {
+                                document.getElementById('resultDisplay').innerHTML = "Your email is up to date!";
+                            } else {
+                                window.location.href = `update_email.html?rollNo=${rollNo}`;
+                            }
+                            found = true;
+                            break;
+                        }
+                    }
 
-
-
+                    if (!found) {
+                        document.getElementById('resultDisplay').innerHTML = 'Result not found! Please check your roll number.';
+                    }
+                })
+                .catch(err => {
+                    console.error("Error fetching results:", err);
+                    document.getElementById('resultDisplay').innerHTML = 'Error fetching results. Please try again later.';
+                });
+        });
+    </script>
 </body>
 </html>
